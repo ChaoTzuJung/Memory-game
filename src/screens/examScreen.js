@@ -44,11 +44,12 @@ class Exam extends Component {
         this.setState({ items: shuffleItems })
     }
 
-    // checkAnswer = targetIcon => {
-    //     const { name, color } = targetIcon;
-    //     const result = _.find(this.props.questions, { name, color });
-    //     return result !== undefined;
-    // };
+    // 判斷對錯
+    checkAnswer = onPressIcon => {
+        const { name, color } = onPressIcon;
+        const result = _.find(this.props.questions, { name, color }); //判斷點過的icon有跟答案有符合一樣的，有就不會undefined
+        return result !== undefined;
+    };
 
     // 當點選後icon元件rerender完，要處理 "玩家選完答案 -> 遊戲結束"
     componentDidUpdate = (prevState, prevProps) => {
