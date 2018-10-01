@@ -128,9 +128,9 @@ class Exam extends Component {
         ))
     }
 
-    // onTimerFinished = () => {
-    //     this.gameFinished();
-    // };
+    onTimerFinished = () => {
+        this.gameFinished();
+    };
 
     // handleEndButton = () => {
     //     Actions.home({ lastScore: this.state.score });
@@ -160,8 +160,8 @@ class Exam extends Component {
                         </View>
                     ) : (
                         <CountDownTimer
-                            // seconds={ANSWER_TIME}
-                            // onFinished={this.onTimerFinished}
+                            seconds={ANSWER_TIME}
+                            onFinished={this.onTimerFinished} // 時間到會觸發此props 且呼叫gameFinished()
                         />
                     )}
                 </View>
