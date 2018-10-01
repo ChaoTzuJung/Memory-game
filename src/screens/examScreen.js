@@ -128,13 +128,15 @@ class Exam extends Component {
         ))
     }
 
+    // 時間到，遊戲結束
     onTimerFinished = () => {
         this.gameFinished();
     };
 
-    // handleEndButton = () => {
-    //     Actions.home({ lastScore: this.state.score });
-    // };
+    // 回首頁
+    handleEndButton = () => {
+        Actions.home({ lastScore: this.state.score });
+    };
 
     render() {
         return (
@@ -153,7 +155,7 @@ class Exam extends Component {
                             </Text>
                             <TouchableOpacity
                                 style={styles.button}
-                                // onPress={this.handleEndButton}
+                                onPress={this.handleEndButton}
                             >
                                 <Text style={[styles.label, { color: "#FFF" }]}>回首頁</Text>
                             </TouchableOpacity>
