@@ -20,6 +20,21 @@ export default class Home extends Component {
         hightestScore: 0 
     };
 
+    async componentDidMount() {
+        const hightestScore = await getItem(config.HIGHEST_SCORE_STORAGE);
+        if(hightestScore !== undefined) {
+            this.setState({ hightestScore });
+        }
+        else {
+            setItem(config.HIGHEST_SCORE_STORAGE, 0)
+        }
+        
+    }
+
+    onStart = () => {
+        Actions.memo();
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -41,7 +56,7 @@ export default class Home extends Component {
                             </Text>
                         </View>
                         <View style={styles.shadowContainer}>
-                            <TouchableOpacity style={styles.startBtn}>
+                            <TouchableOpacity style={styles.startBtn} onPress={this.onStart}>
                                 <Text style={styles.startBtnText}>
                                     Start
                                 </Text>
