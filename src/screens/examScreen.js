@@ -20,6 +20,7 @@ import config from "../config";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import CountDownTimer from "../components/countDownTimer";
 import { Actions } from "react-native-router-flux";
+import { getItem, setItem } from "../utils/asyncStorage";
 
 const { ANSWER_TIME, QUESTION_COUNT, SELECTION_COUNT } = config;
 

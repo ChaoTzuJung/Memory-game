@@ -46,7 +46,7 @@ export default class Home extends Component {
                         <View style={styles.ScoreText}>
                             <Icon name="trophy" size={28} color="#FFD600" />
                             <Text style={styles.label}>
-                                最高分: { this.state.hightestScore }
+                                最高分: { this.state.highestScore }
                             </Text>
                         </View>
                         <View style={styles.ScoreText}>
