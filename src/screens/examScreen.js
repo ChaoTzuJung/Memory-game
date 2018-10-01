@@ -40,7 +40,6 @@ class Exam extends Component {
     componentDidMount() {
         const icons = createUniqRandomIcons(SELECTION_COUNT, this.props.questions); //把之前題目出的5個正解加上25個隨宜icon混在一起成一個30大正列
         const items = icons.map(icon => ({...icon, clicked: false })) //把30個icon加上未被選取的狀態
-        console.dir(items);
         const shuffleItems = _.shuffle(items) // createUniqRandomIcons方法所做出的排序會讓前面25個是亂數，會5個是解答，所以要透過shuffle打散
         this.setState({ items: shuffleItems })
     }
