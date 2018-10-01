@@ -4,12 +4,18 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "rndebugger-open"
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2",
+    "lodash": "^4.17.11",
+    "prop-types": "^15.6.2",
     "react": "16.5.0",
-    "react-native": "0.57.1"
+    "react-native": "0.57.1",
+    "react-native-debugger-open": "^0.3.17",
+    "react-native-router-flux": "^4.0.5",
+    "react-native-vector-icons": "4.4.3"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
