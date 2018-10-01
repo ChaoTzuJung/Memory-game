@@ -33,7 +33,7 @@ class Memo extends Component {
     }
 
     onTimerFinish = () => {
-        Action.exam({
+        Actions.exam({
             questions: this.state.questions // 把問題的正解帶到下一頁
         }); 
     }
@@ -81,7 +81,7 @@ class Memo extends Component {
                         ref={ref => {
                             this.CountDownTimer = ref;
                         }}
-                        onFinish={this.onTimerFinish} // countdownTimer若執行time up 會呼叫 onFinish() 這個props
+                        onFinished={this.onTimerFinish} // countdownTimer若執行time up 會呼叫 onFinish() 這個props
                     />
                     <TouchableOpacity style={styles.skipButton} onPress={this.handleSkip}>
                         <Text style={styles.skipLabel}>跳過</Text>
