@@ -54,6 +54,10 @@ class Memo extends Component {
         ));
     }
 
+    onFinished = () => {
+        Actions.exam();
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -64,7 +68,7 @@ class Memo extends Component {
                     {this.renderQuestions()}
                 </ScrollView>
                 <View style={styles.timerContainer}>
-                    <TouchableOpacity style={styles.skipButton}>
+                    <TouchableOpacity style={styles.skipButton} onPress={this.on}>
                         <Text style={styles.skipLabel}>跳過</Text>
                     </TouchableOpacity>
                 </View>
