@@ -17,13 +17,13 @@ export default class Home extends Component {
     };
 
     state = {
-        hightestScore: 0 
+        highestScore: 0 
     };
 
     async componentDidMount() {
-        const hightestScore = await getItem(config.HIGHEST_SCORE_STORAGE);
-        if(hightestScore !== undefined) {
-            this.setState({ hightestScore });
+        const highestScore = await getItem(config.HIGHEST_SCORE_STORAGE);
+        if(highestScore !== undefined) {
+            this.setState({ highestScore });
         }
         else {
             setItem(config.HIGHEST_SCORE_STORAGE, 0)
@@ -52,7 +52,7 @@ export default class Home extends Component {
                         <View style={styles.ScoreText}>
                             <Icon name="flag-checkered" size={28} color="#40C4FF" />
                             <Text style={styles.label}>
-                                上一頁: { this.state.lastScore }
+                                上一局: { this.props.lastScore }
                             </Text>
                         </View>
                         <View style={styles.shadowContainer}>
