@@ -16,6 +16,7 @@ import {
     randomIconName, randomIconColor, createUniqRandomIcons
 } from '../utils/icons';
 import IconBox from "../components/iconBox";
+import CountDownTimer from "../components/CountDownTimer";
 
 const { QUESTION_COUNT, MEMO_TIME } = config;
 
@@ -54,10 +55,6 @@ class Memo extends Component {
         ));
     }
 
-    onFinished = () => {
-        Actions.exam();
-    }
-
     render() {
         return (
             <View style={styles.container}>
@@ -67,8 +64,9 @@ class Memo extends Component {
                 <ScrollView style={styles.questionContainer}>
                     {this.renderQuestions()}
                 </ScrollView>
+                <CountDownTimer seconds={MEMO_TIME} />
                 <View style={styles.timerContainer}>
-                    <TouchableOpacity style={styles.skipButton} onPress={this.on}>
+                    <TouchableOpacity style={styles.skipButton}>
                         <Text style={styles.skipLabel}>跳過</Text>
                     </TouchableOpacity>
                 </View>
