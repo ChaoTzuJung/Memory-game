@@ -32,6 +32,16 @@ class Memo extends Component {
         });
     }
 
+    onTimerFinish = () => {
+        Action.exam({
+            questions: this.state.questions // 把問題的正解帶到下一頁
+        }); 
+    }
+
+    handleSkip = () => {
+        this.CountDownTimer.onTimesUp(); // 呼叫CountDownTimer下定義的onTimesUp方法，清除this.timer，並執行onFinish()
+    }
+
     renderQuestions = () => {
         return this.state.questions.map((question, index) => (
             <View 
@@ -64,9 +74,15 @@ class Memo extends Component {
                 <ScrollView style={styles.questionContainer}>
                     {this.renderQuestions()}
                 </ScrollView>
-                <CountDownTimer seconds={MEMO_TIME} />
+                <CountDownTimer 
+                    seconds={MEMO_TIME} 
+                    // 將ref這個callback指向CountDownTimer，就可以使用 this.CountDownTimer直接操作CountDownTimer這個DOM
+                    ref={ref => {
+                        this.CountDownTimer = ref;
+                    }}
+                />
                 <View style={styles.timerContainer}>
-                    <TouchableOpacity style={styles.skipButton}>
+                    <TouchableOpacity style={styles.skipButton} onPress={this.handleSkip}>
                         <Text style={styles.skipLabel}>跳過</Text>
                     </TouchableOpacity>
                 </View>
