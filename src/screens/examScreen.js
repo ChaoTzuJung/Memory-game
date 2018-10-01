@@ -76,16 +76,18 @@ class Exam extends Component {
         return count;
     };
 
-    // gameFinished = async () => {
-    //     const score = this.calcScore();
-    //     this.setState({ isFinished: true, score });
-    //     // 如果是新紀錄 -> 記錄最高分到 AsyncStorage
-    //     const highestScore = await getItem(config.HIGHEST_SCORE_STORAGE);
-    //     if (score > highestScore) {
-    //         setItem(config.HIGHEST_SCORE_STORAGE, score);
-    //         Alert.alert("破了新紀錄");
-    //     }
-    // };
+    // 判斷是否破紀錄與更新分數與遊戲狀態
+    gameFinished = async () => {
+        const score = this.calcScore(); //總分
+        // 跟新分數與遊戲狀態
+        this.setState({ isFinished: true, score });
+        // 如果是新紀錄 -> 記錄最高分到 AsyncStorage
+        const highestScore = await getItem(config.HIGHEST_SCORE_STORAGE);
+        if (score > highestScore) {
+            setItem(config.HIGHEST_SCORE_STORAGE, score);
+            Alert.alert("破了新紀錄");
+        }
+    };
 
     getOpacity = item => {
         if(this.state.isFinished) {
