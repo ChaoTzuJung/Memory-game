@@ -10,8 +10,9 @@ import {
     TouchableOpacity
 } from "react-native";
 
-import config from "../config";
 import { Actions } from "react-native-router-flux";
+import config from "../config";
+import IconBox from "../components/iconBox";
 
 const { QUESTION_COUNT, MEMO_TIME } = config;
 
@@ -22,8 +23,17 @@ class Memo extends Component {
 
     renderQuestions = () => {
         return this.state.questions.map((question, index) => (
-            <View key={index}>
-                <Text>question</Text>
+            <View key={index} style={styles.question}>
+                <IconBox
+                    title="Color"
+                    iconName="airplane"
+                    iconColor="2196F3"
+                />
+                <IconBox
+                    title="Shape"
+                    iconName="ghost"
+                    iconColor="#607D8B"
+                />
             </View>
         ));
     }
