@@ -61,6 +61,19 @@ class Exam extends Component {
     //     }
     // };
 
+    // 當點選後icon元件rerender完，要處理 "玩家選完答案 -> 遊戲結束"
+    componentDidUpdate = (prevState, prevProps) => {
+        // 遊戲結束判斷by規則
+        if (
+            prevState !== this.state && 
+            // 玩家點擊題目數量 = 出題數量
+            this.state.selected.length === this.props.questions.length &&
+            this.state.isFinished === false
+        ) {
+            this.gameFinished();
+        }
+    }
+
     // calcScore = () => {
     //     let count = 0;
     //     for (let item of this.state.selected) {
@@ -81,18 +94,6 @@ class Exam extends Component {
     //         setItem(config.HIGHEST_SCORE_STORAGE, score);
     //         Alert.alert("破了新紀錄");
     //     }
-    // };
-
-    // getOpacity = item => {
-    //     if (this.state.isFinished) {
-    //         const { name, color } = item;
-    //         const isQuestion = _.find(this.props.questions, { name, color }) !== undefined;
-    //         if (isQuestion) {
-    //             return item.selected ? 0.7 : 1;
-    //         }
-    //         return 0.2;
-    //     }
-    //     return item.selected ? 0.7 : 1;
     // };
 
     getOpacity = item => {
