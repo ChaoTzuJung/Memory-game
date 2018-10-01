@@ -95,13 +95,18 @@ class Exam extends Component {
     //     return item.selected ? 0.7 : 1;
     // };
 
-    // handleIconPressed = targetIcon => {
-    //     this.setState(state => {
-    //         state.items[_.indexOf(state.items, targetIcon)].selected = true;
-    //         state.selected = [...state.selected, targetIcon];
-    //         return state;
-    //     });
-    // };
+    getOpacity = item => {
+        if(this.state.isFinished) {
+            const { name, color } = item;
+            const isMatchAns = _.find(this.props.questions, { name, color }) !== undefined; // 有選對答案
+            if(isMatchAns) {
+                return item.clicked ? 0.7 : 1; // 有點選且正確就是0.7，沒點選仍保持1
+            }
+            return 0.2; // 遊藝結束時，點過且錯誤的icon變為 0.2 透明度
+        }
+
+        return item.clicked ? 0.7 : 1; // 有點選就是0.7，沒點過保持1
+    }
 
     handleIconPressed = onPressIcon => {
         this.setState(state => {
@@ -123,27 +128,11 @@ class Exam extends Component {
                     name={item.name}
                     size={40}
                     color={item.color}
-                    style={{ padding: 12, opacity: 1 }}
+                    style={{ padding: 12, opacity: this.getOpacity(item) }}
                 />
             </TouchableOpacity>
         ))
     }
-    // renderQuestions = () => {
-    //     return this.state.items.map((item, index) => (
-    //         < TouchableOpacity
-    //             key={index}
-    //             onPress={() => this.handleIconPressed(item)}
-    //             disabled={item.selected}
-    //         >
-    //         <Icon
-    //             name={item.name}
-    //             size={40}
-    //             color={item.color}
-    //             style={{ padding: 12, opacity: this.getOpacity(item) }}
-    //         />
-    //         </TouchableOpacity>
-    //     ));
-    // };
 
     // onTimerFinished = () => {
     //     this.gameFinished();
