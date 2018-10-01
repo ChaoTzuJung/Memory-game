@@ -33,7 +33,13 @@ class Memo extends Component {
 
     renderQuestions = () => {
         return this.state.questions.map((question, index) => (
-            <View key={index} style={styles.question}>
+            <View 
+                key={index} 
+                style={[
+                    styles.question,
+                    // just return 0 or 1
+                    _.random(1) ? { flexDirection: "row-reverse" } : {}
+                ]}>
                 <IconBox
                     title="Color"
                     iconName={randomIconName()}
