@@ -50,17 +50,6 @@ class Exam extends Component {
     //     return result !== undefined;
     // };
 
-    // componentDidUpdate = (prevState, prevProps) => {
-    //     // 玩家選完答案 -> 遊戲結束
-    //     if (
-    //         prevState !== this.state &&
-    //         this.state.selected.length === this.props.questions.length &&
-    //         this.state.isFinished === false
-    //     ) {
-    //         this.gameFinished();
-    //     }
-    // };
-
     // 當點選後icon元件rerender完，要處理 "玩家選完答案 -> 遊戲結束"
     componentDidUpdate = (prevState, prevProps) => {
         // 遊戲結束判斷by規則
@@ -74,16 +63,17 @@ class Exam extends Component {
         }
     }
 
-    // calcScore = () => {
-    //     let count = 0;
-    //     for (let item of this.state.selected) {
-    //         const isCorrect = this.checkAnswer(item);
-    //         if (isCorrect) {
-    //             count += 1;
-    //         }
-    //     }
-    //     return count;
-    // };
+    // 計分判斷
+    calcScore = () => {
+        let count = 0;
+        for (let item of this.state.selected) {
+            const isCorrect = this.checkAnswer(item);
+            if (isCorrect) {
+                count += 1;
+            }
+        }
+        return count;
+    };
 
     // gameFinished = async () => {
     //     const score = this.calcScore();
