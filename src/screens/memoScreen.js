@@ -16,7 +16,7 @@ import {
     randomIconName, randomIconColor, createUniqRandomIcons
 } from '../utils/icons';
 import IconBox from "../components/iconBox";
-import CountDownTimer from "../components/CountDownTimer";
+import CountDownTimer from "../components/countDownTimer";
 
 const { QUESTION_COUNT, MEMO_TIME } = config;
 
@@ -74,15 +74,15 @@ class Memo extends Component {
                 <ScrollView style={styles.questionContainer}>
                     {this.renderQuestions()}
                 </ScrollView>
-                <CountDownTimer 
-                    seconds={MEMO_TIME} 
-                    // 將ref這個callback指向CountDownTimer，就可以使用 this.CountDownTimer直接操作CountDownTimer這個DOM
-                    ref={ref => {
-                        this.CountDownTimer = ref;
-                    }}
-                    onFinish={this.onTimerFinish} // countdownTimer若執行time up 會呼叫 onFinish() 這個props
-                />
                 <View style={styles.timerContainer}>
+                    <CountDownTimer 
+                        seconds={MEMO_TIME} 
+                        // 將ref這個callback指向CountDownTimer，就可以使用 this.CountDownTimer直接操作CountDownTimer這個DOM
+                        ref={ref => {
+                            this.CountDownTimer = ref;
+                        }}
+                        onFinish={this.onTimerFinish} // countdownTimer若執行time up 會呼叫 onFinish() 這個props
+                    />
                     <TouchableOpacity style={styles.skipButton} onPress={this.handleSkip}>
                         <Text style={styles.skipLabel}>跳過</Text>
                     </TouchableOpacity>
