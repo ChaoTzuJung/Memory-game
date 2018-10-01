@@ -30,28 +30,119 @@ class Exam extends Component {
     };
 
     state = {
-        items: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30], // 所有icon題目(30個)
+        items: [], // 所有icon題目(30個)
         selected: [], // 已選的icon
         isFinished: false,
         score: 0
     };
+    
+    componentDidMount() {
+        const icons = createUniqRandomIcons(SELECTION_COUNT, this.props.questions); //把之前題目出的5個正解加上25個隨宜icon混在一起成一個30大正列
+        const items = icons.map(icon => ({...icon, clicked: false })) //把30個icon加上未被選取的狀態
+        console.dir(items);
+        const shuffleItems = _.shuffle(items) // createUniqRandomIcons方法所做出的排序會讓前面25個是亂數，會5個是解答，所以要透過shuffle打散
+        this.setState({ items: shuffleItems })
+    }
+
+    // checkAnswer = targetIcon => {
+    //     const { name, color } = targetIcon;
+    //     const result = _.find(this.props.questions, { name, color });
+    //     return result !== undefined;
+    // };
+
+    // componentDidUpdate = (prevState, prevProps) => {
+    //     // 玩家選完答案 -> 遊戲結束
+    //     if (
+    //         prevState !== this.state &&
+    //         this.state.selected.length === this.props.questions.length &&
+    //         this.state.isFinished === false
+    //     ) {
+    //         this.gameFinished();
+    //     }
+    // };
+
+    // calcScore = () => {
+    //     let count = 0;
+    //     for (let item of this.state.selected) {
+    //         const isCorrect = this.checkAnswer(item);
+    //         if (isCorrect) {
+    //             count += 1;
+    //         }
+    //     }
+    //     return count;
+    // };
+
+    // gameFinished = async () => {
+    //     const score = this.calcScore();
+    //     this.setState({ isFinished: true, score });
+    //     // 如果是新紀錄 -> 記錄最高分到 AsyncStorage
+    //     const highestScore = await getItem(config.HIGHEST_SCORE_STORAGE);
+    //     if (score > highestScore) {
+    //         setItem(config.HIGHEST_SCORE_STORAGE, score);
+    //         Alert.alert("破了新紀錄");
+    //     }
+    // };
+
+    // getOpacity = item => {
+    //     if (this.state.isFinished) {
+    //         const { name, color } = item;
+    //         const isQuestion = _.find(this.props.questions, { name, color }) !== undefined;
+    //         if (isQuestion) {
+    //             return item.selected ? 0.7 : 1;
+    //         }
+    //         return 0.2;
+    //     }
+    //     return item.selected ? 0.7 : 1;
+    // };
+
+    // handleIconPressed = targetIcon => {
+    //     this.setState(state => {
+    //         state.items[_.indexOf(state.items, targetIcon)].selected = true;
+    //         state.selected = [...state.selected, targetIcon];
+    //         return state;
+    //     });
+    // };
 
     renderQuestions = () => {
         return this.state.items.map((item, index) => (
             <TouchableOpacity
                 key={index}
-                disabled={true}
+                disabled={false}
                 onPress={() => console.log(item)}
             >
                 <Icon
-                    name="airplane"
+                    name={item.name}
                     size={40}
-                    color="#4CAF50"
+                    color={item.color}
                     style={{ padding: 12, opacity: 1 }}
                 />
             </TouchableOpacity>
         ))
     }
+    // renderQuestions = () => {
+    //     return this.state.items.map((item, index) => (
+    //         < TouchableOpacity
+    //             key={index}
+    //             onPress={() => this.handleIconPressed(item)}
+    //             disabled={item.selected}
+    //         >
+    //         <Icon
+    //             name={item.name}
+    //             size={40}
+    //             color={item.color}
+    //             style={{ padding: 12, opacity: this.getOpacity(item) }}
+    //         />
+    //         </TouchableOpacity>
+    //     ));
+    // };
+
+    // onTimerFinished = () => {
+    //     this.gameFinished();
+    // };
+
+    // handleEndButton = () => {
+    //     Actions.home({ lastScore: this.state.score });
+    // };
 
     render() {
         return (
@@ -68,12 +159,18 @@ class Exam extends Component {
                             <Text style={[styles.label, { color: "#EF5350" }]}>
                                 答對了{this.state.score}題
                             </Text>
-                            <TouchableOpacity style={styles.button}>
+                            <TouchableOpacity
+                                style={styles.button}
+                                // onPress={this.handleEndButton}
+                            >
                                 <Text style={[styles.label, { color: "#FFF" }]}>回首頁</Text>
                             </TouchableOpacity>
                         </View>
                     ) : (
-                        <CountDownTimer />
+                        <CountDownTimer
+                            // seconds={ANSWER_TIME}
+                            // onFinished={this.onTimerFinished}
+                        />
                     )}
                 </View>
             </View>
