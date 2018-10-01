@@ -12,27 +12,37 @@ import {
 
 import { Actions } from "react-native-router-flux";
 import config from "../config";
+import {
+    randomIconName, randomIconColor, createUniqRandomIcons
+} from '../utils/icons';
 import IconBox from "../components/iconBox";
 
 const { QUESTION_COUNT, MEMO_TIME } = config;
 
 class Memo extends Component {
     state = {
-        questions: [1,2,3]
+        questions: []
     };
+
+    componentDidMount() {
+        const questions = createUniqRandomIcons(QUESTION_COUNT); // return array and include object (key1:name, key2: color)
+        this.setState({
+            questions
+        });
+    }
 
     renderQuestions = () => {
         return this.state.questions.map((question, index) => (
             <View key={index} style={styles.question}>
                 <IconBox
                     title="Color"
-                    iconName="airplane"
-                    iconColor="2196F3"
+                    iconName={randomIconName()}
+                    iconColor={question.color}
                 />
                 <IconBox
                     title="Shape"
-                    iconName="ghost"
-                    iconColor="#607D8B"
+                    iconName={question.name}
+                    iconColor={randomIconColor()}
                 />
             </View>
         ));
