@@ -103,12 +103,21 @@ class Exam extends Component {
     //     });
     // };
 
+    handleIconPressed = onPressIcon => {
+        this.setState(state => {
+            state.items[_.indexOf(state.items, onPressIcon)].clicked = true;
+            state.selected = [...state.selected, onPressIcon]
+            return state;
+        })
+        console.log(this.state.selected)
+    }
+
     renderQuestions = () => {
         return this.state.items.map((item, index) => (
             <TouchableOpacity
                 key={index}
-                disabled={false}
-                onPress={() => console.log(item)}
+                disabled={item.clicked}
+                onPress={() => this.handleIconPressed(item)}
             >
                 <Icon
                     name={item.name}
